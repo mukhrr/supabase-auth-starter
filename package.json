@@ -1,9 +1,8 @@
 {
-  "name": "onur.dev",
-  "description": "My personal website.",
+  "name": "ieltsgurus",
+  "description": "IELTS Instructors Hub",
   "author": {
-    "name": "Onur Şuyalçınkaya",
-    "url": "https://onur.dev"
+    "name": "Mukhriddin Shakhriyorov"
   },
   "scripts": {
     "dev": "next dev",
