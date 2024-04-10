@@ -10,5 +10,5 @@ export async function GET(request) {
   }
 
   draftMode().disable()
-  return NextResponse.json({ messsage: 'Draft mode is disabled successfully', now: Date.now() }, { status: 200 })
+  return NextResponse.json({ message: 'Draft mode is disabled successfully', now: Date.now() }, { status: 200 })
 }
