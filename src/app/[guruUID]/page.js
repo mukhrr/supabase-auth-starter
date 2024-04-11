@@ -9,9 +9,8 @@ import {PageTitle} from '@/components/page-title'
 import {Button} from '@/components/ui/button.jsx'
 import {getAllPosts} from '@/lib/contentful'
 import {getSortedPosts, getItemsByYear} from '@/lib/utils'
-import {createServerComponentClient} from "@supabase/auth-helpers-nextjs";
-import {cookies} from 'next/headers'
 import {redirect} from "next/navigation";
+import {createClient} from "@/lib/supabase/server";
 
 async function fetchData() {
     const allPosts = await getAllPosts()
@@ -20,9 +19,9 @@ async function fetchData() {
     return {items}
 }
 
-export default async function Home() {
+export default async function GuruHome({params}) {
     const {items} = await fetchData()
-    const supabase = createServerComponentClient({cookies})
+    const supabase = createClient()
     const {data: {user}} = await supabase.auth.getUser()
 
     if (!user) redirect('/login')
@@ -46,7 +45,7 @@ export default async function Home() {
                         at Sistas, Mobile Developer at Tanbula, and Specialist at Apple.
                     </p>
                     <Button asChild variant="link" className="inline px-0">
-                        <Link href="/writing">
+                        <Link href={`/${params?.guruUID}/writing`}>
                             <h2 className="mb-4 mt-8">Writing</h2>
                         </Link>
                     </Button>

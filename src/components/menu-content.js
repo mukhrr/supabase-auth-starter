@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import {NavigationLink} from '@/components/navigation-link'
 import {PROFILES, LINKS} from '@/lib/constants'
-import {useParams, useRouter} from "next/navigation";
+import {useParams} from "next/navigation";
 
 export const MenuContent = () => {
     const params = useParams()

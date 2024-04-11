@@ -1,4 +1,3 @@
-import '@/globals.css'
 import {draftMode} from 'next/headers'
 import {EyeIcon} from 'lucide-react'
 
