@@ -1,15 +1,19 @@
-import {NextResponse} from 'next/server'
 import {updateSession} from '@/lib/supabase/middleware'
-import {createMiddlewareClient} from "@supabase/auth-helpers-nextjs";
 
-export async function middleware(req, event) {
-    const res = NextResponse.next();
-    const supabase = createMiddlewareClient({req, res});
-    const user = await supabase.auth.getUser();
-    if (!user) {
-        return NextResponse.redirect('/login');
-    }
-    return res;
+export async function middleware(req) {
+    return await updateSession(req);
 }
 
-export const config = {matcher: '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',}
+export const config = {
+    matcher: [
+        /*
+         * Match all request paths except:
+         * - _next/static (static files)
+         * - _next/image (image optimization files)
+         * - favicon.ico (favicon file)
+         * - images - .svg, .png, .jpg, .jpeg, .gif, .webp
+         * Feel free to modify this pattern to include more paths.
+         */
+        "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    ],
+};

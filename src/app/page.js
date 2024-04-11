@@ -1,60 +1,50 @@
-import {Suspense} from 'react'
-import Link from 'next/link'
+import AuthButton from "@/components/auth-button";
+import { createClient } from "@/lib/supabase/server";
 
-import {ScrollArea} from '@/components/scroll-area'
-import {LoadingSpinner} from '@/components/loading-spinner'
-import {WritingList} from '@/components/writing-list'
-import {FloatingHeader} from '@/components/floating-header'
-import {PageTitle} from '@/components/page-title'
-import {Button} from '@/components/ui/button.jsx'
-import {getAllPosts} from '@/lib/contentful'
-import {getSortedPosts, getItemsByYear} from '@/lib/utils'
-import {createServerComponentClient} from "@supabase/auth-helpers-nextjs";
-import {cookies} from 'next/headers'
-import {redirect} from "next/navigation";
+import Header from "@/components/header";
 
-async function fetchData() {
-    const allPosts = await getAllPosts()
-    const sortedPosts = getSortedPosts(allPosts)
-    const items = getItemsByYear(sortedPosts)
-    return {items}
-}
+export default async function Index() {
+    const canInitSupabaseClient = () => {
+        // This function is just for the interactive tutorial.
+        // Feel free to remove it once you have Supabase connected.
+        try {
+            createClient();
+            return true;
+        } catch (e) {
+            return false;
+        }
+    };
 
-export default async function Home() {
-    const {items} = await fetchData()
-    const supabase = createServerComponentClient({cookies})
-    const {data: {session}} = await supabase.auth.getSession()
-
-    if (!session) redirect('/login')
+    const isSupabaseConnected = canInitSupabaseClient();
 
     return (
-        <ScrollArea useScrollAreaId>
-            <FloatingHeader scrollTitle="Onur Şuyalçınkaya"/>
-            <div className="content-wrapper">
-                <div className="content">
-                    <PageTitle title="Home" className="lg:hidden"/>
-                    <p>
-                        Hi 👋 I'm Onur (meaning "Honour" in English), a software engineer, dj, writer, and minimalist
-                        based in
-                        Amsterdam, The Netherlands.
-                    </p>
-                    <p>
-                        I develop things as a Senior Frontend Software Engineer at Bitvavo. Previously, I worked as a
-                        Senior
-                        Frontend Software Engineer at heycar, Frontend Software Engineer at Yemeksepeti, Fullstack
-                        Software Engineer
-                        at Sistas, Mobile Developer at Tanbula, and Specialist at Apple.
-                    </p>
-                    <Button asChild variant="link" className="inline px-0">
-                        <Link href="/writing">
-                            <h2 className="mb-4 mt-8">Writing</h2>
-                        </Link>
-                    </Button>
-                    <Suspense fallback={<LoadingSpinner/>}>
-                        <WritingList items={items} header="Writing"/>
-                    </Suspense>
+        <div className="flex-1 w-full flex flex-col gap-20 items-center">
+            <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
+                <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
+                    {isSupabaseConnected && <AuthButton />}
                 </div>
+            </nav>
+
+            <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl px-3">
+                <Header />
+                <main className="flex-1 flex flex-col gap-6">
+                    Main content goes here
+                </main>
             </div>
-        </ScrollArea>
-    )
+
+            <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
+                <p>
+                    Powered by{" "}
+                    <a
+                        href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
+                        target="_blank"
+                        className="font-bold hover:underline"
+                        rel="noreferrer"
+                    >
+                        Supabase
+                    </a>
+                </p>
+            </footer>
+        </div>
+    );
 }
