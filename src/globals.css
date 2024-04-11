@@ -4,8 +4,6 @@
 
 @layer base {
   :root {
-    /* --sh-class: #0070f3; */
-    /* --sh-identifier: #0070f3; */
     --sh-keyword: #ff0078;
     --sh-string: #028265;
     --sh-comment: #9ca3af;
@@ -169,99 +167,6 @@
   pre code {
     counter-reset: sh-line-number;
   }
-
-  /* .token.important,
-  .token.bold {
-    @apply font-medium;
-  }
-
-  .token.comment,
-  .token.prolog,
-  .token.doctype,
-  .token.cdata {
-    @apply text-gray-400;
-  }
-
-  .token.namespace {
-    @apply opacity-70;
-  }
-
-  .token.property,
-  .token.symbol,
-  .token.deleted,
-  .token.keyword.null {
-    @apply text-[#d9931e];
-  }
-
-  .token.atrule,
-  .token.keyword,
-  .token.class,
-  .token.spread.operator {
-    @apply font-bold text-[#ff0078];
-  }
-
-  .token.tag,
-  .token.class-name,
-  .token.function-variable,
-  .token.function:not(.function-variable),
-  .token.number,
-  .token.property-access,
-  .token.maybe-class-name:not(.imports) {
-    @apply text-[#0070f3];
-  }
-
-  .token.entity,
-  .token.url,
-  .language-css .token.string,
-  .style .token.string,
-  .token.attr-name,
-  .token.regex,
-  .token.important,
-  .token.variable:not(.dom) {
-    @apply text-[#d9931e];
-  }
-
-  .token.attr-value,
-  .token.selector,
-  .token.string,
-  .token.char,
-  .token.builtin,
-  .token.inserted {
-    @apply text-[#028265];
-  }
-
-  .token.boolean {
-    @apply text-[#36acaa];
-  }
-
-  .token.constant {
-    color: inherit;
-  }
-
-  .token.spread .token.punctuation {
-    @apply text-[#ff0078];
-  }
-
-  .token.spread .token.attr-value {
-    @apply text-white;
-  }
-
-  .language-css {
-    @apply text-[#028265];
-  }
-
-  .language-css .token.rule {
-    @apply text-[#ff0078];
-  }
-
-  .language-css .token.number,
-  .language-css .token.unit {
-    @apply text-[#60a7fa];
-  }
-
-  code.language-bash .token.function {
-    @apply text-[#028265];
-  } */
 }
 
 @layer utilities {
@@ -274,30 +179,24 @@
     padding-right: env(safe-area-inset-right);
   }
 
-  /* .bg-r-shadow-gradient {
-    background: linear-gradient(90deg, hsla(0, 0%, 100%, 0), #fff);
-  } */
-
-  /* .bg-top-gradient {
-    --gradient-from: 247 185 85;
-    --gradient-to: 255 0 128;
-    --geist-background: #fff;
-    background: linear-gradient(to top, var(--geist-background) 0, hsla(0, 0%, 100%, 0) 100%),
-      linear-gradient(
-        to right,
-        rgb(var(--gradient-from, 192.5 192.5 192.5) / 0.08) 0,
-        rgb(var(--gradient-to, 192.5 192.5 192.5) / 0.08) 100%
-      );
-    background-size: 100% 100%, 100% 100%, 1440px 1px;
-    background-position: bottom;
-    background-repeat: no-repeat;
-  } */
-
   .bg-dots {
     @apply bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px];
   }
 
   .bg-grid {
     @apply bg-white bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px];
+  }
+}
+
+.animate-in {
+  animation: animateIn 0.3s ease 0.15s both;
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

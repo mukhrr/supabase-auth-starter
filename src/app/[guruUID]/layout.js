@@ -11,7 +11,7 @@ export default async function GuruLayout({children}) {
     preloadGetAllPosts(isEnabled)
 
     return (
-        <div vaul-drawer-wrapper="" className="min-h-screen bg-white">
+        <div>
             {isEnabled && (
                 <div
                     className="absolute bottom-0 left-0 right-0 z-50 flex h-12 w-full items-center justify-center bg-green-500 text-center text-sm font-medium text-white">

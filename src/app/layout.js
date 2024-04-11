@@ -3,14 +3,11 @@ import {JetBrains_Mono} from "next/font/google";
 
 import "../globals.css";
 
-// import {SpeedInsights} from "@vercel/speed-insights/dist/next";
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import {Toaster} from "@/components/ui/sonner";
-import {sharedDescription, sharedTitle} from "@/app/shared-metadata";
+import {sharedDescription, sharedTitle, defaultUrl} from "@/app/shared-metadata";
 import {PROFILES} from "@/lib/constants";
 
-const defaultUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000";
 
 const jetbrainsMono = JetBrains_Mono({
     subsets: ['latin'],
@@ -23,10 +20,10 @@ export default function RootLayout({children}) {
     return (
         <html lang="en" className={`${GeistSans.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
         <body className="bg-background text-foreground" suppressHydrationWarning>
-        <main vaul-drawer-wrapper="" className="min-h-screen flex flex-col items-center">
+        <main vaul-drawer-wrapper="" className="min-h-screen bg-white animate-in">
             {children}
 
-            {/*<SpeedInsights/>*/}
+            <SpeedInsights/>
             <Toaster
                 closeButton
                 richColors
@@ -41,7 +38,7 @@ export default function RootLayout({children}) {
 }
 
 export const metadata = {
-    metadataBase: defaultUrl,
+    metadataBase:  new URL(defaultUrl),
     robots: {
         index: true,
         follow: true

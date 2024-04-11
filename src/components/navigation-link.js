@@ -31,9 +31,9 @@ export const NavigationLink = memo(({ href, label, icon, shortcutNumber }) => {
 
   let isActive = false
   if (pathname?.length > 0) {
-    const splittedPathname = pathname.split('/')
-    const currentPathname = splittedPathname[1] ?? ''
-    isActive = currentPathname === href.split('/')[1]
+    const splitPathname = pathname.split('/')
+    const currentPathname = splitPathname[2] ?? ''
+    isActive = currentPathname === href.split('/')[2]
   }
 
   return (

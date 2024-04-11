@@ -54,27 +54,11 @@ export const PROFILES = {
     url: 'https://www.instagram.com/jgrmn',
     icon: <InstagramIcon size={16} />
   },
-  soundcloud: {
-    title: 'Soundcloud',
-    url: 'https://soundcloud.com/jagerman'
-  },
   youtube: {
     title: 'YouTube',
     url: 'https://www.youtube.com/c/jagermanmusic',
     icon: <YoutubeIcon size={16} />
   },
-  bluesky: {
-    title: 'Bluesky',
-    url: 'https://staging.bsky.app/profile/onur.dev'
-  },
-  readcv: {
-    title: 'Read.cv',
-    url: 'https://read.cv/onur'
-  },
-  pinterest: {
-    title: 'Pinterest',
-    url: 'https://nl.pinterest.com/onurschu'
-  }
 }
 
 export const TWEETS_COLLECTION_ID = 15896982

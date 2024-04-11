@@ -30,7 +30,7 @@ export default async function Home() {
     return (
         <ScrollArea useScrollAreaId>
             <FloatingHeader scrollTitle="Onur Şuyalçınkaya"/>
-            <div className="content-wrapper">
+            <div className="content-wrapper animate-in">
                 <div className="content">
                     <PageTitle title="Home" className="lg:hidden"/>
                     <p>
