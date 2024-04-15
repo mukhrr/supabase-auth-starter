@@ -1,36 +1,46 @@
-import AuthButton from "@/components/auth-button";
-import {createClient} from "@/lib/supabase/server";
+import Link from "next/link";
+import Image from "next/image";
+import {cn} from "@/lib/utils"
+import {buttonVariants} from "@/components/ui/button";
 
-import Header from "@/components/header";
+// import Header from "@/components/header";
 
 export default async function Index() {
-    const canInitSupabaseClient = () => {
-        // This function is just for the interactive tutorial.
-        // Feel free to remove it once you have Supabase connected.
-        try {
-            createClient();
-            return true;
-        } catch (e) {
-            return false;
-        }
-    };
-
-    const isSupabaseConnected = canInitSupabaseClient();
-
     return (
-        <div className="flex-1 w-full flex flex-col gap-20 items-center">
-            <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-                <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
-                    {isSupabaseConnected && <AuthButton/>}
-                </div>
-            </nav>
+        <div className="flex-1 w-full flex flex-col gap-20 items-center min-h-screen">
+                <header
+                    className='sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
+                    <div className='flex h-14 items-center justify-between w-full px-6'>
+                        <div className='mr-4 hidden md:flex'>
+                            <Link href='/' className='mr-6 flex items-center space-x-2'>
+                                <Image width='24' height='24' src='/assets/logo.png' alt="Logo" className='border-0'/>
+                                <span className='hidden font-bold sm:inline-block'>
+               IELTS GURUS
+              </span>
+                            </Link>
+                        </div>
 
-            <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl px-3 min-h-screen">
-                <Header/>
+                        <nav className='flex items-center gap-4'>
+                            <Link
+                                href='/login'
+                                className={cn(buttonVariants({variant: "outline"}))}
+                            >
+                                Login
+                            </Link>
+                            <Link
+                                href='/signup'
+                                className={cn(buttonVariants({variant: "default"}))}
+                            >
+                                Signup
+                            </Link>
+                        </nav>
+                    </div>
+                </header>
+
+
                 <main className="flex-1 flex flex-col gap-6">
                     Main content goes here
                 </main>
-            </div>
 
             <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
                 <p>
