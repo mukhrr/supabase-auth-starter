@@ -12,9 +12,7 @@ export default async function Index() {
                     <div className='mr-4 hidden md:flex'>
                         <Link href='/' className='mr-6 flex items-center space-x-2'>
                             <Image width='24' height='24' src='/assets/logo.png' alt="Logo" className='border-0'/>
-                            <span className='hidden font-bold sm:inline-block'>
-               IELTS GURUS
-              </span>
+                            <span className='hidden font-bold sm:inline-block'>IELTS GURUS</span>
                         </Link>
                     </div>
 

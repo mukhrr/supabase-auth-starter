@@ -38,7 +38,7 @@ export default async function AuthButton() {
                 Login
             </Link>
             <Link
-                href='/signup'
+                href='/register'
                 className={cn(buttonVariants({variant: "default"}))}
             >
                 Signup
