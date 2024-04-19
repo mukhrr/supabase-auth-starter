@@ -12,6 +12,9 @@ module.exports = {
       xl: '1280px'
     },
     extend: {
+      colors: {
+        background: 'rgba(255, 255, 255, 0.85)'
+      },
       animation: {
         reveal: 'reveal 0.7s ease-in-out'
       },

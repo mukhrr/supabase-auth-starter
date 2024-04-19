@@ -1,7 +1,7 @@
-import {headers} from "next/headers";
-import {createClient} from "@/lib/supabase/server";
 import {redirect} from "next/navigation";
-import {SubmitButton} from "./submit-button";
+
+import {createClient} from "@/lib/supabase/server";
+import {SubmitButton} from "@/components/ui/submit-button";
 
 export default function Login({searchParams}) {
     const signIn = async (formData) => {
@@ -21,30 +21,6 @@ export default function Login({searchParams}) {
         }
 
         return redirect("/");
-    };
-
-    const signUp = async (formData) => {
-        "use server";
-
-        const origin = headers().get("origin");
-        const email = formData.get("email")
-        const password = formData.get("password")
-
-        const supabase = createClient();
-
-        const {error} = await supabase.auth.signUp({
-            email,
-            password,
-            options: {
-                emailRedirectTo: `${origin}/auth/callback`,
-            },
-        });
-
-        if (error) {
-            return redirect("/login?message=Could not authenticate user");
-        }
-
-        return redirect("/login?message=Check email to continue sign in process");
     };
 
     return (
@@ -71,17 +47,10 @@ export default function Login({searchParams}) {
                 />
                 <SubmitButton
                     formAction={signIn}
-                    className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2"
+                    className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
                     pendingText="Signing In..."
                 >
                     Sign In
-                </SubmitButton>
-                <SubmitButton
-                    formAction={signUp}
-                    className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-                    pendingText="Signing Up..."
-                >
-                    Sign Up
                 </SubmitButton>
                 {searchParams?.message && (
                     <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
