@@ -3,7 +3,6 @@ import {Suspense} from 'react'
 import {ScrollArea} from '@/components/scroll-area'
 import {FloatingHeader} from '@/components/floating-header'
 import {LoadingSpinner} from '@/components/loading-spinner'
-import {WritingListLayout} from '@/components/writing/writing-list-layout'
 import {getPageSeo} from '@/lib/contentful'
 // import {getSortedPosts} from '@/lib/utils'
 import {createServerComponentClient} from "@supabase/auth-helpers-nextjs";

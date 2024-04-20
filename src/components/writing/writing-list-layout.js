@@ -7,7 +7,7 @@ import { WritingLink } from '@/components/writing-link'
 import { cn } from '@/lib/utils'
 
 export const WritingListLayout = ({ list, isMobile }) => {
-  // const viewData = useViewData()
+  const viewData = ['']
   const pathname = usePathname()
 
   return (

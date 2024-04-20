@@ -15,6 +15,7 @@ export default function Header({children}) {
     const [scroll, setScroll] = useState(false)
     const [open, setOpen] = useState(false)
 
+    console.log(open)
     useEffect(() => {
         const intersectionObserver = new IntersectionObserver(
             (entries) => {

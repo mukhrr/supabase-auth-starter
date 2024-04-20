@@ -59,7 +59,7 @@ export default function SignUpForm() {
         }
 
         return setErrorMessage('')
-    }, [errorMessage])
+    }, [errorMessage, searchMessage])
 
     return (
         <>

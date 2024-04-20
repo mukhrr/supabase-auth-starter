@@ -62,7 +62,7 @@ export default function AuthForm() {
         }
 
         return setErrorMessage('')
-    }, [errorMessage])
+    }, [errorMessage, searchMessage])
 
     return (
         <>

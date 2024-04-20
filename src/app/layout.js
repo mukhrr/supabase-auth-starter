@@ -20,7 +20,7 @@ export default function RootLayout({children}) {
     return (
         <html lang="en" className={`${GeistSans.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
         <body className="bg-background text-foreground" suppressHydrationWarning>
-        <main vaul-drawer-wrapper="" className="min-h-screen bg-white animate-in">
+        <main className="min-h-screen bg-white animate-in">
             {children}
 
             <SpeedInsights/>
