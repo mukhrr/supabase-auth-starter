@@ -3,7 +3,7 @@ import Link from "next/link"
 import {cn} from "@/lib/utils"
 import {buttonVariants} from "@/components/ui/button"
 
-import SignUpForm from "./signupForm"
+import SignUpForm from "./signUpForm"
 
 export default function SignUpPage() {
     return (
