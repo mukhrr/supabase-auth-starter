@@ -1,9 +1,10 @@
 import {GeistSans} from "geist/font/sans";
 import {JetBrains_Mono} from "next/font/google";
+import {Analytics} from "@vercel/analytics/react"
 
 import "@/globals.css";
 
-import { SpeedInsights } from '@vercel/speed-insights/next'
+import {SpeedInsights} from '@vercel/speed-insights/next'
 import {Toaster} from "@/components/ui/sonner";
 import {sharedDescription, sharedTitle, defaultUrl} from "@/app/shared-metadata";
 import {PROFILES} from "@/lib/constants";
@@ -23,6 +24,7 @@ export default function RootLayout({children}) {
         <main className="min-h-screen bg-white animate-in">
             {children}
 
+            <Analytics/>
             <SpeedInsights/>
             <Toaster
                 closeButton
@@ -38,7 +40,7 @@ export default function RootLayout({children}) {
 }
 
 export const metadata = {
-    metadataBase:  new URL(defaultUrl),
+    metadataBase: new URL(defaultUrl),
     robots: {
         index: true,
         follow: true
