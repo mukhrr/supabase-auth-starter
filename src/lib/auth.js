@@ -4,41 +4,66 @@ import {revalidatePath} from 'next/cache'
 import {redirect} from 'next/navigation'
 
 import {createClient} from '@/lib/supabase/server'
+import {headers} from "next/headers";
 
-export async function login(formData) {
-    const supabase = createClient()
+export const signUp = async (formData) => {
+    const supabase = createClient();
 
-    // type-casting here for convenience
-    // in practice, you should validate your inputs
-    const data = {
-        email: formData.get('email'),
-        password: formData.get('password'),
-    }
+    const origin = headers().get("origin");
+    const {email, password, username} = formData
 
-    const {error} = await supabase.auth.signInWithPassword(data)
+    const {error} = await supabase.auth.signUp({
+        username,
+        email,
+        password,
+        options: {
+            emailRedirectTo: `${origin}/auth/callback`,
+        },
+    });
 
     if (error) {
-        redirect('/error')
+        console.error(error);
+        return redirect("/signup?message=Could not authorize");
     }
 
-    revalidatePath('/', 'layout')
-    redirect('/')
+    return redirect("/signup?message=Check email to continue sign in process");
 }
 
-export async function signup(formData) {
-    const supabase = createClient()
+export const signIn = async (formData) => {
+    const {email, password} = formData
+    const supabase = createClient();
 
-    const data = {
-        email: formData.get('email'),
-        password: formData.get('password'),
-    }
-
-    const {error} = await supabase.auth.signUp(data)
+    const {error} = await supabase.auth.signInWithPassword({
+        email,
+        password,
+    });
 
     if (error) {
-        redirect('/error')
+        return redirect("/login?message=Incorrect email or password");
     }
 
     revalidatePath('/', 'layout')
-    redirect('/')
+    return redirect("/");
+};
+
+export const handleGoogleLogin = async () => {
+    const origin = headers().get("origin");
+    const supabase = createClient();
+
+    const {data, error} = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+            redirectTo: `${origin}/auth/callback`,
+            queryParams: {
+                access_type: 'offline',
+                prompt: 'consent',
+            },
+        },
+    })
+
+    if (error) {
+        return redirect("/login?message=Could not authenticate user");
+    }
+
+    return redirect(data.url);
 }

@@ -1,9 +1,6 @@
 import {createClient} from "@/lib/supabase/server";
 import {redirect} from "next/navigation";
 import Link from "next/link";
-import {cn} from "@/lib/utils";
-import {buttonVariants} from "@/components/ui/button";
-import {Command} from "lucide-react";
 import Image from "next/image";
 
 export default async function AuthLayout({children}) {
@@ -28,13 +25,14 @@ export default async function AuthLayout({children}) {
                 <div className='relative z-20 h-screen flex items-center space-x-2'>
                     <blockquote className='space-y-2'>
                         <p className='text-lg'>
-                            &ldquo;It does not matter how slowly you go as long as you do not stop.&rdquo;
+                            &ldquo;The superiority of the learned man over the devout is like that of the moon, on the
+                            night when it is full, over the rest of the stars.&rdquo;
                         </p>
-                        <footer className='text-sm italic'>Confucius</footer>
+                        <footer className='text-sm italic'>Muhammad S.A.W</footer>
                     </blockquote>
                 </div>
             </div>
-            <div className='lg:p-8 flex items-center justify-center h-screen w-full -mt-28'>
+            <div className='p-8 flex items-center justify-center h-screen w-full -mt-28 relative'>
                 {children}
             </div>
         </div>
