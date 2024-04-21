@@ -3,7 +3,8 @@ import Link from "next/link";
 import {redirect} from "next/navigation";
 
 import {cn} from "@/lib/utils"
-import {buttonVariants} from "@/components/ui/button";
+import {Button, buttonVariants} from "@/components/ui/button";
+import {SubmitButton} from "@/components/ui/submit-button";
 
 export default async function AuthButton() {
     const supabase = createClient();
@@ -22,11 +23,11 @@ export default async function AuthButton() {
 
     return user ? (
         <div className="flex items-center gap-4">
-            Hey, {user.user_metadata?.name}!
+            Hey, {user.user_metadata?.name || user.email}!
             <form action={signOut}>
-                <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
+                <SubmitButton formAction={signOut}>
                     Logout
-                </button>
+                </SubmitButton>
             </form>
         </div>
     ) : (
@@ -38,7 +39,7 @@ export default async function AuthButton() {
                 Login
             </Link>
             <Link
-                href='/register'
+                href='/signup'
                 className={cn(buttonVariants({variant: "default"}))}
             >
                 Signup
