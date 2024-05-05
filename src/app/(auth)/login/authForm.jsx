@@ -2,8 +2,7 @@
 
 import {useEffect, useState} from "react"
 import {zodResolver} from "@hookform/resolvers/zod"
-import {GitHubLogoIcon} from "@radix-ui/react-icons"
-import {Loader2} from "lucide-react"
+import {Loader} from "lucide-react"
 import {useForm} from "react-hook-form"
 import * as z from "zod"
 import {toast} from "sonner";
@@ -49,7 +48,10 @@ export default function AuthForm() {
         await setLoading(false)
     };
 
-    const loginWithGoogle = async () => await handleGoogleLogin()
+    const loginWithGoogle = async () => {
+        await setLoading(true)
+        await handleGoogleLogin()
+    }
 
     useEffect(() => {
         if (searchMessage) {
@@ -97,7 +99,7 @@ export default function AuthForm() {
                         )}
                     />
                     <Button type='submit' className='w-full' disabled={loading}>
-                        {loading && <Loader2 className='mr-2 animate-spin' size={16}/>}
+                        {loading && <Loader className='mr-2 animate-spin' size={16}/>}
                         Submit
                     </Button>
                 </form>
@@ -120,7 +122,7 @@ export default function AuthForm() {
                 className={cn('flex items-center gap-2')}
             >
                 {loading ? (
-                    <Loader2 className='mr-2 animate-spin' size={16}/>
+                    <Loader className='mr-2 animate-spin' size={16}/>
                 ) : (
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from "react"
 import {zodResolver} from "@hookform/resolvers/zod"
-import {Loader2} from "lucide-react"
+import {Loader} from "lucide-react"
 import {useForm} from "react-hook-form"
 import * as z from "zod"
 import {toast} from "sonner";
@@ -114,7 +114,7 @@ export default function SignUpForm() {
                         )}
                     />
                     <Button type='submit' className='w-full' disabled={loading}>
-                        {loading && <Loader2 className='mr-2 animate-spin' size={16}/>}
+                        {loading && <Loader className='mr-2 animate-spin' size={16}/>}
                         Continue
                     </Button>
                 </form>

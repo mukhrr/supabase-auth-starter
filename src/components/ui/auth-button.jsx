@@ -3,7 +3,7 @@ import Link from "next/link";
 import {redirect} from "next/navigation";
 
 import {cn} from "@/lib/utils"
-import {Button, buttonVariants} from "@/components/ui/button";
+import {buttonVariants} from "@/components/ui/button";
 import {SubmitButton} from "@/components/ui/submit-button";
 
 export default async function AuthButton() {
@@ -23,7 +23,7 @@ export default async function AuthButton() {
 
     return user ? (
         <div className="flex items-center gap-4">
-            Hey, {user.user_metadata?.name || user.email}!
+            Hey, {user.user_metadata?.name || user.user_metadata?.username || user.email}!
             <form action={signOut}>
                 <SubmitButton formAction={signOut}>
                     Logout
