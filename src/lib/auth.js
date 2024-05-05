@@ -13,10 +13,10 @@ export const signUp = async (formData) => {
     const {email, password, username} = formData
 
     const {error} = await supabase.auth.signUp({
-        username,
         email,
         password,
         options: {
+            data: {username},
             emailRedirectTo: `${origin}/auth/callback`,
         },
     });

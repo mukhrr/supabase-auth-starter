@@ -2,8 +2,7 @@
 
 import {useEffect, useState} from "react"
 import {zodResolver} from "@hookform/resolvers/zod"
-import {GitHubLogoIcon} from "@radix-ui/react-icons"
-import {Loader2} from "lucide-react"
+import {Loader} from "lucide-react"
 import {useForm} from "react-hook-form"
 import * as z from "zod"
 import {toast} from "sonner";
@@ -19,15 +18,15 @@ import {
 } from "@/components/ui/form"
 import {Input} from "@/components/ui/input"
 import {handleGoogleLogin, signIn} from "@/lib/auth";
+import {cn} from "@/lib/utils";
 
 export default function AuthForm() {
     const [loading, setLoading] = useState(false)
     const searchParams = useSearchParams()
     const searchMessage = searchParams.get('message')
-    const [errorMessage, setErrorMessage] = useState("")
     const formSchema = z.object({
         email: z.string().email({message: "Invalid email address."}),
-        password: z.string().min(1, {message: "Invalid password"}),
+        password: z.string().min(6, {message: "Password must not be less than 6 characters."}),
     })
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -47,22 +46,18 @@ export default function AuthForm() {
         await setLoading(true)
         await signIn(formData)
         await setLoading(false)
-        await setErrorMessage(searchMessage)
     };
 
     const loginWithGoogle = async () => {
+        await setLoading(true)
         await handleGoogleLogin()
     }
 
-
     useEffect(() => {
-        if (errorMessage) {
+        if (searchMessage) {
             toast.error(searchMessage)
-            setErrorMessage(searchMessage)
         }
-
-        return setErrorMessage('')
-    }, [errorMessage, searchMessage])
+    }, [searchMessage])
 
     return (
         <>
@@ -104,11 +99,9 @@ export default function AuthForm() {
                         )}
                     />
                     <Button type='submit' className='w-full' disabled={loading}>
-                        {loading && <Loader2 className='mr-2 animate-spin' size={16}/>}
+                        {loading && <Loader className='mr-2 animate-spin' size={16}/>}
                         Submit
                     </Button>
-
-                    <div className="text-center text-red-600">{errorMessage}</div>
                 </form>
             </Form>
             <div className='relative'>
@@ -126,11 +119,24 @@ export default function AuthForm() {
                 type='submit'
                 onClick={loginWithGoogle}
                 disabled={loading}
+                className={cn('flex items-center gap-2')}
             >
                 {loading ? (
-                    <Loader2 className='mr-2 animate-spin' size={16}/>
+                    <Loader className='mr-2 animate-spin' size={16}/>
                 ) : (
-                    <GitHubLogoIcon className='mr-2 h-4 w-4'/>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    >
+                        <path d="M20.945 11a9 9 0 1 1-3.284-5.997l-2.655 2.392A5.5 5.5 0 1 0 17.125 14H13v-3z"/>
+                    </svg>
                 )}
                 Google
             </Button>

@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from "react"
 import {zodResolver} from "@hookform/resolvers/zod"
-import {Loader2} from "lucide-react"
+import {Loader} from "lucide-react"
 import {useForm} from "react-hook-form"
 import * as z from "zod"
 import {toast} from "sonner";
@@ -21,7 +21,6 @@ import {signUp} from "@/lib/auth";
 
 export default function SignUpForm() {
     const [loading, setLoading] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("")
     const searchParams = useSearchParams()
     const searchMessage = searchParams.get('message')
     const formSchema = z.object({
@@ -30,7 +29,7 @@ export default function SignUpForm() {
             .min(4, {message: "Username must not be less than 4 characters."})
             .max(20, {message: "Username cannot be more than 20 characters"}),
         email: z.string().email({message: "Invalid email address."}),
-        password: z.string().min(1, {message: "Invalid password."}),
+        password: z.string().min(6, {message: "Password must not be less than 6 characters."}),
     })
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -47,19 +46,15 @@ export default function SignUpForm() {
         await setLoading(true)
         await signUp(formData)
         await setLoading(false)
-        await setErrorMessage(searchMessage)
     };
 
     const {formState} = form
 
     useEffect(() => {
-        if (errorMessage) {
+        if (searchMessage) {
             toast.error(searchMessage)
-            setErrorMessage(searchMessage)
         }
-
-        return setErrorMessage('')
-    }, [errorMessage, searchMessage])
+    }, [searchMessage])
 
     return (
         <>
@@ -119,10 +114,9 @@ export default function SignUpForm() {
                         )}
                     />
                     <Button type='submit' className='w-full' disabled={loading}>
-                        {loading && <Loader2 className='mr-2 animate-spin' size={16}/>}
+                        {loading && <Loader className='mr-2 animate-spin' size={16}/>}
                         Continue
                     </Button>
-                    <div className="text-center text-red-600">{errorMessage}</div>
                 </form>
             </Form>
         </>
