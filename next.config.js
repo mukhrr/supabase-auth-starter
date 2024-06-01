@@ -9,7 +9,7 @@ module.exports = {
     deviceSizes: [390, 435, 768, 1024, 1280]
   },
   experimental: {
-    optimizePackageImports: ['framer-motion', '@supabase/supabase-js', 'react-tweet'],
+    optimizePackageImports: ['framer-motion', '@supabase/supabase-js'],
     webVitalsAttribution: ['FCP', 'LCP', 'CLS', 'FID', 'TTFB', 'INP']
   }
 }
