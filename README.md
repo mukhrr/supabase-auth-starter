@@ -43,3 +43,5 @@ To run this project, you will need to add the following environment variables to
 
 `NEXT_PUBLIC_SUPABASE_URL` \
 `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+#### [Buy me a pizza](https://buymeacoffee.com/mukher) 🍕 or give a star ⭐
