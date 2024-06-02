@@ -6,7 +6,7 @@ An open source boilerplate to ship your indie project faster.
 
 ## Tech Stack
 
-[Next js]([url](https://nextjs.org/)), [TailwindCSS]([url](https://tailwindcss.com/)), [Supabase]([url](https://supabase.com/)), [Shadcn UI]([url](https://ui.shadcn.com/))
+[Next js](https://nextjs.org/), [TailwindCSS](https://tailwindcss.com/), [Supabase](https://supabase.com/), [Shadcn UI](https://ui.shadcn.com/)
 
 
 #### Node version: 18.x
